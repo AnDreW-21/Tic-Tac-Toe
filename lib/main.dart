@@ -1,15 +1,19 @@
-import 'package:flutter/cupertino.dart';
+//Name: Andrew Naseif
+//Version: 1.1
+//Tic-Tac-Toe
 import 'package:flutter/material.dart';
-
+int count=0;
 void main() {
   runApp(MyApp());
 }
+//used to change the color of screen
 bool check=true;
 var list = [
   ["", "", ""],
   ["", "", ""],
   ["", "", ""]
 ];
+//"O"will start the game every time
 var element = "O";
 class MyApp extends StatelessWidget {
   @override
@@ -38,13 +42,12 @@ class Game extends StatefulWidget {
   @override
   _GameState createState() => _GameState();
 }
-
+//Build the tic tac toe board
 class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(shape: BoxShape.rectangle),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -87,14 +90,18 @@ class _GameState extends State<Game> {
                     check=!check;
                 list[r][c] = element;
                 if (element == "X") {
+                  count++;
                   element = "O";
                 } else {
+                  count++;
                   element = "X";
                 }
               },
             );
           }
-          WhoISWinner(r, c);
+          if(count>=5){
+            whoISWinner(r, c);
+          }
         },
         child: Text("${list[r][c]}",
             style: TextStyle(
@@ -104,8 +111,8 @@ class _GameState extends State<Game> {
       ),
     );
   }
-
-  WhoISWinner(int r, int c) {
+//function to check if there is winner or not
+  whoISWinner(int r, int c) {
     var col = 0,
         row = 0,
         rCurve = 0,
