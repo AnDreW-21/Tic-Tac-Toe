@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
 }
+bool check=true;
 var list = [
   ["", "", ""],
   ["", "", ""],
@@ -29,7 +30,6 @@ class MyApp extends StatelessWidget {
             leading: Icon(Icons.adb_rounded, color: Colors.white),
           ),
           body: Game(),
-          backgroundColor: Colors.black87,
         ));
   }
 }
@@ -42,25 +42,28 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(shape: BoxShape.rectangle),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [addElement(0, 0), addElement(0, 1), addElement(0, 2)],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [addElement(1, 0), addElement(1, 1), addElement(1, 2)],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [addElement(2, 0), addElement(2, 1), addElement(2, 2)],
-          )
-        ],
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(shape: BoxShape.rectangle),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [addElement(0, 0), addElement(0, 1), addElement(0, 2)],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [addElement(1, 0), addElement(1, 1), addElement(1, 2)],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [addElement(2, 0), addElement(2, 1), addElement(2, 2)],
+            )
+          ],
+        ),
       ),
+      backgroundColor: (check==false)?Colors.black:Colors.white,
     );
   }
 
@@ -71,9 +74,9 @@ class _GameState extends State<Game> {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(width: 1.0, color: Colors.red),
-          left: BorderSide(width: 1.0, color: Colors.yellow),
+          left: BorderSide(width: 1.0, color: Colors.blueAccent),
           right: BorderSide(width: 1.0, color: Colors.red),
-          bottom: BorderSide(width: 1.0, color: Colors.yellow),
+          bottom: BorderSide(width: 1.0, color: Colors.blue),
         ),
       ),
       child: FlatButton(
@@ -81,6 +84,7 @@ class _GameState extends State<Game> {
           if (list[r][c].isEmpty) {
             setState(
                   () {
+                    check=!check;
                 list[r][c] = element;
                 if (element == "X") {
                   element = "O";
@@ -95,7 +99,7 @@ class _GameState extends State<Game> {
         child: Text("${list[r][c]}",
             style: TextStyle(
                 fontSize: 40,
-                color: Colors.white,
+                color: Colors.redAccent,
                 fontWeight: FontWeight.bold)),
       ),
     );
